@@ -2,8 +2,6 @@
 const ui = new UI();
 const loginForm = document.querySelector('#buttonClick');
 function eventList() {
-
-
 	//trigger the button
 	loginForm.addEventListener('click', LoginUser);
 }
@@ -18,7 +16,6 @@ async function LoginUser(e) {
 	loginForm.innerHTML = `
 	<span class="spinner-border spinner-border-sm"></span> Processing
 `;
-
 
 	const userDetails = {
 		email: email,

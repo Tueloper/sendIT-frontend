@@ -107,63 +107,6 @@
     <script>
     new WOW().init();
     </script>
-    <script>
-        $(document).ready(function() {
-
-    
-      var readURL = function(input) {
-          if (input.files && input.files[0]) {
-              var reader = new FileReader();
-
-              reader.onload = function (e) {
-                  $('.avatar').attr('src', e.target.result);
-              }
-
-              reader.readAsDataURL(input.files[0]);
-          }
-      }
-
-
-      $(".file-upload").on('change', function(){
-          readURL(this);
-      });
-      });
-    </script>
-    <script>
-        // const ui = new UI();
-
-        async function viewProfile() {
-          console.log('instructed');
-          await fetch("https://senditappkh.herokuapp.com/api/v1/me", {
-            method: "GET",
-            headers: {
-            Accept: 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${sessionStorage.getItem('user_jwt')}`, 
-            },
-          })
-            .then(function(response) {
-              return response.json();
-            })
-            .then(function(data) {
-              console.log(`this is the data ${JSON.stringify(data)}`);
-              document.getElementById('first_name').value = data.full_name;
-              document.getElementById('phone').value = data.phone;
-              document.getElementById('email').value = data.email;
-              document.getElementById('location').value = data.address;
-              document.getElementById('img_id').src = data.img_id
-              // window.location.href = "/index.html";
-            })
-            .catch(function(error) {
-              console.log(`error has happened ${error.message}`);
-              // ui.printMessage(error.message, "alert-danger");
-            });
-        }
-
-        viewProfile();
-
-        
-
-    </script>
+    <script src="./js/dashboard/profile.js"></script>
   </body>
 </html>

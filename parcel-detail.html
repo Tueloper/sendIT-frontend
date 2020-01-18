@@ -51,66 +51,8 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr>
-                                          <td>1</td>
-                                          <td>04/10/2013</td>                        
-                                          <td>Iphone 8</td>
-                                          <td>20 abak Oron. Akwa Ibom</td>
-                                          <td>Delivered</td>
-                                          <td>
-                                            <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder4"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
-                                            <a href="#" class="delete" title="cancel" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                      </tr>
-                                      <tr>
-                                          <td>2</td>
-                                          <td>05/08/2014</td>                       
-                                          <td>Wrist Watch</td>
-                                          <td>20 abak Oron. Akwa Ibom</td>
-                                          <td>Pending</td>
-                                          <td>
-                                            <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder3"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
-                                            <a href="#"  data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash-alt"></i></a>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td>3</td>
-                                          <td>11/05/2015</td>
-                                          <td>Laptop</td>
-                                          <td>20 abak Oron. Akwa Ibom</td>
-                                          <td>Processing</td>                        
-                                          <td>
-                                            <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder2"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
-                                            <a href="#" class="delete" title="cancel" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-                                          </td>                        
-                                      </tr>
-                                      <tr >
-                                          <td>4</td>
-                                          <td>06/09/2016</td>
-                                          <td>Television</td>
-                                          <td>20 abak Oron. Akwa Ibom</td>
-                                          <td class="status">Delivered</td>
-                                          <td>
-                                          <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder1"><i class="fas fa-eye"></i></a>
-                                          <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
-                                          <a href="#" class="settings" title="View Order" data-toggle="modal"  onclick="deleteRow(this)" data-target="#deleteOrder1"><i class="fas fa-trash-alt"></i></a>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td>5</td>
-                                          <td>12/08/2017</td>                        
-                                          <td>Clothe</td>
-                                          <td>20 abak Oron. Akwa Ibom</td>
-                                          <td>Pending</td>
-                                          <td>
-                                            <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder0"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-trash-alt"></i></a>
-                                          </td>
-                                      </tr>
+                                    
+                                     
                                   </tbody>
                               </table>
                               <div class="modal fade" id="ViewOrder1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -196,10 +138,10 @@
                                     </div>
                             
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item"><a href="#" class="page-link">Previous</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                                    <li class="page-item "><a href="#" class="page-link">Previous</a></li>
+                                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
                                     <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                                    <li class="page-item "><a href="#" class="page-link">3</a></li>
                                     <li class="page-item"><a href="#" class="page-link">4</a></li>
                                     <li class="page-item"><a href="#" class="page-link">5</a></li>
                                     <li class="page-item"><a href="#" class="page-link">Next</a></li>
@@ -232,21 +174,64 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
     <script type="text/javascript" src="libs/jquery.slimscroll.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+    <script src="./js/dashboard/profile.js"></script>
     <!-- <script src="js/wow.min.js"></script> -->
     <script>
     new WOW().init();
     </script>
+    <script src="./js/moment.js"></script>
     <script>
+      
+    async function getParcelDetails() {
+      await fetch('https://senditappkh.herokuapp.com/api/v1/getUser/Orders', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('user_jwt')}`
+        }
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(datas) {
+        // return console.log(datas);
+        const table = document.querySelector('tbody');
+       
+        // let i = 1
+
+        datas.forEach((data, i ) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${i}</td>
+            <td>${data.createdAt}</td>                        
+            <td>${data.parcel_name}</td>
+            <td>${data.destination_address}, ${data.destination_state}</td>
+            <td>${data.status}</td>
+            <td>
+              <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder4"><i class="fas fa-eye"></i></a>
+              <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
+              <a href="#" class="delete" title="cancel" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          `;
+
+          table.appendChild(tr);
+        })
+       
+      })
+      .catch(function(error) {
+        console.log(`error has happened ${error.message}`);
+		  });
+    }
+    getParcelDetails()
+
     function deleteRow(r) {
       var i = r.parentNode.parentNode.rowIndex;
       document.getElementById("tableDelete").deleteRow(i);
       alert('row' + row.rowIndex)
     }
 
-    // function pending() {
-     var status = document.querySelector('.status');
-      console.log(status.textContent);
-    // }
+  
     </script>
   </body>
 </html>
