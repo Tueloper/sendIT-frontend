@@ -56,29 +56,20 @@
                               </table>
 
 
-                              <div class="modal fade" id="ViewOrder1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal fade" id="ViewOrder4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">YOUR ORDERED DETAILS</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">ORDER DETAILS</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
-                                      <div class="modal-body">
-                                       <ul class="orderedListStyle">
-                                         <li>21st November,2019</li>
-                                         <li>Iphone</li>
-                                         <li>No 13 Abak Road Eket Akwa Ibom State</li>
-                                         <li>Delivered</li>
-                                       </ul>
+                                      <div class="modal-body view-order">
+                                       
                                       </div>
                                       <div class="modal-footer" id="deletemodal">
-                                        <p class="m0">Have You Recieve Your Order?</p>
-                                        <div class="pull-right">                              
-                                            <button type="button" class="btn btn-danger">No</button>
-                                            <button type="button" class="btn btn-danger">Yes</button>
-                                            </div> 
+                                        
                                       </div>
                                     </div>
                                   </div>
@@ -185,7 +176,7 @@
     <script>
     
     let orders = '';
-    
+
     async function getParcelDetails() {
       await fetch('https://senditappkh.herokuapp.com/api/v1/getUser/Orders', {
         method: 'GET',
@@ -212,7 +203,7 @@
             <td>${data.destination_address}, ${data.destination_state}</td>
             <td>${data.status}</td>
             <td>
-              <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder4"><i class="fas fa-eye"></i></a>
+              <a href="#" onclick="viewOrder('${data._id}')" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder4"><i class="fas fa-eye"></i></a>
               <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
               <a href="#" onclick="deleteRow('${data._id}')" class="delete" title="cancel" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
             </td>
@@ -220,17 +211,98 @@
 
           table.appendChild(tr);
         })
-       
+        orders = datas;
       })
       .catch(function(error) {
         console.log(`error has happened ${error.message}`);
 		  });
     }
-    getParcelDetails()
+    getParcelDetails();
+
+    //viewing order
+    async function viewOrder(id) {
+      await fetch(`https://senditappkh.herokuapp.com/api/v1/getSingle/order/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('user_jwt')}`
+        }
+      })
+      .then((res) => {return res.json()})
+      .then((data) => {
+        const order = data.order;
+        const time = moment(order.createdAt).format("MMM Do YYYY");
+        // return console.log(order)
+
+        const divOrder = document.querySelector('.view-order');
+        const checker = document.querySelector('.view-seen');
+        const deletemodal = document.querySelector('#deletemodal');
+        const ul = document.createElement('ul');
+        ul.classList.add('orderedListStyle');
+        ul.innerHTML = `
+            <li class="view-seen">Sender: ${order.sender_name}</li>
+            <li>Parcel Name: ${order.parcel_name}</li>
+            <li>sender Phone Number: ${order.sender_phone_number}</li>
+            <li>Reciever Name: ${order.recipient_name}</li>
+            <li>Reciever Email: ${order.recipient_email}</li>
+            <li>Reciever Phone Number: ${order.recipient_phone_number}</li>
+            <li>Destination: ${order.destination_address}, ${order.destination_state}</li>
+            <li>Price: ${order.price}</li>
+            <li>Status: ${order.status}</li>
+            <li class="view-seen">Date ordered: ${time}</li>
+        `;
+        deletemodal.innerHTML = `
+          <p class="m0">Have Your Order Been Delivered?</p>
+          <div class="pull-right">                              
+            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-danger" onclick="delivered('${order._id}')">Yes</button>
+          </div>  
+        `;
+
+        //display info
+        if (checker) {
+          return
+        }else {
+          divOrder.appendChild(ul);
+        }
+       
+      })
+      .catch((err) => {
+        return console.log(err.message)
+      })
+    }
+
+    async function delivered(id) {
+      await fetch(`https://senditappkh.herokuapp.com/api/v1/delivered/order/${id}`, {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('user_jwt')}`
+        }
+      })
+      .then(res => res.json())
+      .then(async (deliver) => {
+        await Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your Order is Delivered Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+        window.location.reload();
+      })
+      .catch((err) => {
+        return console.log(err.message)
+      })
+    }
 
     function deleteRow(_id) {
       // const id = _id
       // return console.log(_id)
+      return console.log(orders)
 
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
