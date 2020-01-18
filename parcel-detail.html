@@ -52,9 +52,10 @@
                                   </thead>
                                   <tbody>
                                     
-                                     
                                   </tbody>
                               </table>
+
+
                               <div class="modal fade" id="ViewOrder1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -170,7 +171,8 @@
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
     <script type="text/javascript" src="libs/jquery.slimscroll.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
@@ -181,7 +183,9 @@
     </script>
     <script src="./js/moment.js"></script>
     <script>
-      
+    
+    let orders = '';
+    
     async function getParcelDetails() {
       await fetch('https://senditappkh.herokuapp.com/api/v1/getUser/Orders', {
         method: 'GET',
@@ -195,23 +199,22 @@
         return response.json();
       })
       .then(function(datas) {
-        // return console.log(datas);
         const table = document.querySelector('tbody');
-       
-        // let i = 1
-
+  
         datas.forEach((data, i ) => {
           const tr = document.createElement('tr');
+          const time = moment(data.createdAt).format("MMM Do YYYY");  
+     
           tr.innerHTML = `
-            <td>${i}</td>
-            <td>${data.createdAt}</td>                        
+            <td>${i + 1}</td>
+            <td>${time}</td>
             <td>${data.parcel_name}</td>
             <td>${data.destination_address}, ${data.destination_state}</td>
             <td>${data.status}</td>
             <td>
               <a href="#" class="settings" title="View Order" data-toggle="modal" data-target="#ViewOrder4"><i class="fas fa-eye"></i></a>
               <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="fas fa-pen"></i></a>
-              <a href="#" class="delete" title="cancel" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+              <a href="#" onclick="deleteRow('${data._id}')" class="delete" title="cancel" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
             </td>
           `;
 
@@ -225,10 +228,64 @@
     }
     getParcelDetails()
 
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("tableDelete").deleteRow(i);
-      alert('row' + row.rowIndex)
+    function deleteRow(_id) {
+      // const id = _id
+      // return console.log(_id)
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You are about to Delete this Order!!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then(async (result, id) => {
+        if (result.value) {
+          await fetch(`https://senditappkh.herokuapp.com/api/v1/delete/order/${_id}`, {
+            method: 'DELETE',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${sessionStorage.getItem('user_jwt')}`
+            }
+          })
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(data) {
+            return console.log(data)
+            console.log(data + 'Deleted')
+          
+          })
+          .catch(function(error) {
+            console.log(`error has happened ${error.message}`);
+          });
+          await swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your Order has been deleted.',
+            'success'
+          )
+          window.location.reload();
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your Order is safe :)',
+            'error'
+          )
+        }
+      })
     }
 
   
