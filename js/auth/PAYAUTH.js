@@ -35,7 +35,7 @@ class PAYAUTH {
 			const priceOrder = order.json();
 
 			return {
-				priceObj
+				priceOrder
 			};
 		} catch (err) {
 			return console.log(err.message);

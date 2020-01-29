@@ -10,18 +10,14 @@ function eventList() {
 
 eventList();
 
-
-
-
-
-async function placeOrder(e) {
+async function editProfile(e) {
 	e.preventDefault();
-	const full_name = document.querySelector('#full_name').value;
+	const full_name = document.querySelector('#first_name').value;
 	const phone = document.querySelector('#phone').value;
-	const address = document.querySelector('#address').value;
-	
+	const address = document.querySelector('#location').value;
+	const email = document.querySelector('#email').value;
 
-	if (!fill_name  || !address || !phone_number) {
+	if (!full_name || !address || !phone || !email) {
 		ui.printMessage('Fill all Fields!!!', 'alert-danger');
 	} else {
 		ui.printMessage('Thank You for Your Info, Processing!', 'alert-success');
@@ -29,14 +25,13 @@ async function placeOrder(e) {
 		editProfileForm.innerHTML = `
 			<span class="spinner-border spinner-border-sm"></span> Processing
 		`;
-	
 
 		//get user details
 		const userDetails = {
-			 
-			full_name: full_name ,
-      phone: phone,
-      address: address
+			full_name: full_name,
+			phone: phone,
+			address: address,
+			email: email
 		};
 
 		// return console.log(userDetails)
@@ -46,17 +41,25 @@ async function placeOrder(e) {
 			method: 'PATCH',
 			headers: {
 				Accept: 'application/json',
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${sessionStorage.getItem('user_jwt')}`
 			},
 			body: JSON.stringify(userDetails)
 		})
 			.then(function(response) {
 				return response.json();
 			})
-			.then(function(data) {
+			.then(async function(data) {
+				await Swal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Your Profile Is Updated',
+					showConfirmButton: false,
+					timer: 1500
+				});
 				console.log(data);
-				editProfileForm.innerHTML = `Confirm Order`;
-				return window.location.href = '';
+				editProfileForm.innerHTML = `Save`;
+				return window.location.reload();
 			})
 			.catch(function(error) {
 				console.log(error.message);
