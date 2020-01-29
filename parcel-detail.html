@@ -78,7 +78,7 @@
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="exampleModalLabel">YOUR ORDERED DETAILS</h5>
+                                          <h5 class="modal-title" id="exampleModalLabel">EDIT ORDER DETAILS</h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -101,34 +101,7 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="modal fade" id="deleteOrder1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                      <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">DELETE YOUR ORDER</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                           <ul class="orderedListStyle">
-                                             <li>21st November,2019</li>
-                                             <li>Television</li>
-                                             <li>No 38 Afaha Uqua Road Eket Akwa Ibom State</li>
-                                             <li>Delivered</li>
-                                           </ul>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <p class="m0">Are you sure you ant to terminate this order?</p>
-                                            <div class="pull-right">
-                                              <button type="button" data-dismiss="modal"  class="btn btn-default">No</button>
-                                              <button type="button" class="btn btn-danger">Continue</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                            
+              
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item "><a href="#" class="page-link">Previous</a></li>
                                     <li class="page-item active"><a href="#" class="page-link">1</a></li>
@@ -156,7 +129,7 @@
       </div>
 
 
-
+      <script src="./js/auth/PAYAUTH.js"></script>
     <script src="js/dashboard/dashboard.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Popper JS -->
@@ -248,6 +221,7 @@
             <li>Reciever Email: ${order.recipient_email}</li>
             <li>Reciever Phone Number: ${order.recipient_phone_number}</li>
             <li>Destination: ${order.destination_address}, ${order.destination_state}</li>
+            <li>Parcel Weight: ${order.weight}</li>
             <li>Price: ${order.price}</li>
             <li>Status: ${order.status}</li>
             <li class="view-seen">Date ordered: ${time}</li>
@@ -302,7 +276,7 @@
     function deleteRow(_id) {
       // const id = _id
       // return console.log(_id)
-      return console.log(orders)
+      // return console.log(orders)
 
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {

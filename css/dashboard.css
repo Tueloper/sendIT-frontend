@@ -503,17 +503,21 @@ a:hover {
 .active {
 	color: #ff2b2b !important;
 }
-.orderedListStyle{
+.orderedListStyle {
 	list-style: none;
 	margin: 0;
-	padding:0;
+	padding: 0;
 }
-.m0{
-	margin:0 !important;
+.m0 {
+	margin: 0 !important;
 }
-.modal-footer{
-	display:block;
+.modal-footer {
+	display: block;
 }
-label h4{
-	color:#000 !important;
+label h4 {
+	color: #000 !important;
+}
+
+.payment {
+	display: none;
 }

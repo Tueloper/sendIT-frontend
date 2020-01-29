@@ -3,7 +3,7 @@ class UI {
 	printMessage(message, className) {
 		//div containing the message whether error or success
 		const messageDiv = document.createElement('div');
-		messageDiv.classList.add('alert', 'infor', className);
+		messageDiv.classList.add('alert', 'infor', 'text-center', className);
 		messageDiv.setAttribute('role', 'alert');
 		messageDiv.appendChild(document.createTextNode(message));
 		//   const dismis = `
@@ -23,6 +23,4 @@ class UI {
 			document.querySelector('.alert').remove();
 		}, 3000);
 	}
-
-	
 }

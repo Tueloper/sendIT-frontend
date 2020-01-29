@@ -1,17 +1,17 @@
 var mybutton = document.getElementById('myBtn');
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {
-	scrollFunction();
-};
+// window.onscroll = function() {
+// 	scrollFunction();
+// };
 
-function scrollFunction() {
-	if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 20) {
-		mybutton.style.display = 'block';
-	} else {
-		mybutton.style.display = 'none';
-	}
-}
+// function scrollFunction() {
+// 	if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 20) {
+// 		mybutton.style.display = 'block';
+// 	} else {
+// 		mybutton.style.display = 'none';
+// 	}
+// }
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
@@ -95,26 +95,26 @@ function loadDoc() {
 	};
 }
 
-window.onload = function() {
-	var chart = new CanvasJS.Chart('chartContainer', {
-		theme: 'light1', // "light2", "dark1", "dark2"
-		animationEnabled: false, // change to true
-		title: {
-			text: ''
-		},
-		data: [
-			{
-				// Change type to "bar", "area", "spline", "pie",etc.
-				type: 'column',
-				dataPoints: [
-					{ label: 'Jan', y: 15 },
-					{ label: 'Feb', y: 20 },
-					{ label: 'March', y: 25 },
-					{ label: 'April', y: 30 },
-					{ label: 'May', y: 28 }
-				]
-			}
-		]
-	});
-	chart.render();
-};
+// window.onload = function() {
+// 	var chart = new CanvasJS.Chart('chartContainer', {
+// 		theme: 'light1', // "light2", "dark1", "dark2"
+// 		animationEnabled: false, // change to true
+// 		title: {
+// 			text: ''
+// 		},
+// 		data: [
+// 			{
+// 				// Change type to "bar", "area", "spline", "pie",etc.
+// 				type: 'column',
+// 				dataPoints: [
+// 					{ label: 'Jan', y: 15 },
+// 					{ label: 'Feb', y: 20 },
+// 					{ label: 'March', y: 25 },
+// 					{ label: 'April', y: 30 },
+// 					{ label: 'May', y: 28 }
+// 				]
+// 			}
+// 		]
+// 	});
+// 	chart.render();
+// };
