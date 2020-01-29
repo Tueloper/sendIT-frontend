@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="./js/auth/UserAuth.js"></script>
+    <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
     <title>Sendit-Dashboard</title>
   
 
@@ -134,7 +135,7 @@
                         <!-- payment modal -->
                         <div class="modal fade" id="viewPaymentSlip" tabindex="-1" role="dialog" aria-labelledby="paymentModal" aria-hidden="true">
                           <div class="modal-dialog" role="document">
-                            <div class="modal-content card-1">
+                            <div class="modal-content ">
                               <div class="modal-header">
                                 <h4 class="modal-title " id="paymentModal">Payment Invoice</h4>
                               </div>
@@ -183,7 +184,8 @@
                                       <h3 class=" bolder Amount"></h3>
                                     </div>
                                   </div>
-                                  <div class="mt-5 pull-right"><button class="btn btn-danger">Proceed with Flutter Wave </button></div>
+                                  
+                                  <div class="mt-5 pull-right"><button class="btn btn-danger" onclick="payWithRave()">Proceed with Flutter Wave </button></div>
 
                                   <div class="container mt-8" id="nameey">
                                     <hr>

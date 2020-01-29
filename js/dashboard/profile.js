@@ -1,9 +1,12 @@
 const pay = new PAYAUTH();
 
+let globaluser;
+
 async function viewProfile() {
 	// console.log(());
 	const user = await pay.getPayUser();
 	const data = user.owner;
+	globaluser = data;
 
 	document.getElementById('img_top').src = data.image_url;
 	const userName = document.getElementById('userName');

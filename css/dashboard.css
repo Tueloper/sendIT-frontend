@@ -126,7 +126,7 @@ a {
 	padding: 6px 11px;
 	position: relative;
 	display: -ms-flexbox;
-	width: 700px;
+	width: auto;
 	display: flex;
 	-ms-flex-direction: column;
 	flex-direction: column;

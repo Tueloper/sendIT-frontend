@@ -38,6 +38,7 @@ eventList();
 
 async function placeOrder(e) {
 	e.preventDefault();
+	// return console.log(globaluser);
 
 	const name = document.querySelector('#name').value;
 	const parcel_name = document.querySelector('#parcel_name').value;
@@ -193,5 +194,41 @@ async function viewPayment(e) {
 
 	table.appendChild(tr);
 
-	Amount.innerHTML = `${prices}`;
+	Amount.innerHTML = `₦ ${prices}`;
+}
+
+function payWithRave() {
+	const order = orders.NewOrder;
+	var x = getpaidSetup({
+		PBFPubKey: `FLWPUBK-0aa31a8eab2568f1dd4ed04742abf699-X`,
+		customer_email: `${globaluser.email}`,
+		amount: `${prices}`,
+		customer_phone: `${globaluser.phone_number}`,
+		currency: 'NGN',
+		txref: 'rave-123456',
+		meta: [
+			{
+				metaname: 'flightID',
+				metavalue: 'AP1234'
+			}
+		],
+		onclose: function() {},
+		callback: async function(response) {
+			var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
+			console.log('This is the response returned after a charge', response);
+			if (response.tx.chargeResponseCode == '00' || response.tx.chargeResponseCode == '0') {
+				// redirect to a success page
+				window.location.href = '/parcel-details.html';
+			} else {
+				// redirect to a failure page.
+				await pay.deleteOrder(order._id);
+				ui.printMessage(
+					'There was an Error with Payment, Please fill form and Try again, Thanks',
+					'alert-danger'
+				);
+			}
+
+			x.close(); // use this to close the modal immediately after payment.
+		}
+	});
 }
