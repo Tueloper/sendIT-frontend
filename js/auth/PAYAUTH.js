@@ -20,6 +20,28 @@ class PAYAUTH {
 		}
 	}
 
+	async confirmPayemnt(priceObj) {
+		try {
+			const order = await fetch('https://senditappkh.herokuapp.com/api/v1/order/price', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${sessionStorage.getItem('user_jwt')}`
+				},
+				body: JSON.stringify(priceObj)
+			});
+
+			const priceOrder = order.json();
+
+			return {
+				priceObj
+			};
+		} catch (err) {
+			return console.log(err.message);
+		}
+	}
+
 	async deleteOrder(id) {
 		try {
 			const deleteOrder = await fetch(`https://senditappkh.herokuapp.com/api/v1/delete/order/${id}`, {
