@@ -522,3 +522,7 @@ label h4 {
 .payment {
 	display: none;
 }
+
+button.swal2-cancel.btn.btn-danger {
+	margin-right: 10px !important;
+}

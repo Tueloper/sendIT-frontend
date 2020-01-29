@@ -34,7 +34,7 @@ class GEOCORD {
 	async calculatePrice(distance, weight) {
 		//convert distance to price
 
-		const meterDistance = parseFloat(distance * weight * 50);
+		const meterDistance = parseFloat(distance * weight * 50) / 15;
 
 		//flooring values
 		const priceV = Math.floor(meterDistance);

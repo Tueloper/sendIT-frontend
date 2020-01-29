@@ -183,6 +183,7 @@ async function viewPayment(e) {
 	const table = document.querySelector('tbody');
 	const tr = document.createElement('tr');
 	const Amount = document.querySelector('.Amount');
+	const deletemodal = document.querySelector('#deleteM');
 
 	tr.innerHTML = `
 		<td>${order.parcel_name}</td>
@@ -195,6 +196,13 @@ async function viewPayment(e) {
 	table.appendChild(tr);
 
 	Amount.innerHTML = `₦ ${prices}`;
+
+	deletemodal.innerHTML = `
+	<p class="m0">Cancel this Order</p>
+	<div class="pull-right">                              
+		<button type="button" class="btn btn-danger" data-dismiss="modal"  onclick="deleteOrder('${order._id}')">Cancel Order</button>
+	</div>  
+`;
 }
 
 function payWithRave() {
@@ -239,4 +247,28 @@ function payWithRave() {
 			x.close(); // use this to close the modal immediately after payment.
 		}
 	});
+}
+
+async function deleteOrder(id) {
+	try {
+		await pay.deleteOrder(id);
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			onOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer);
+				toast.addEventListener('mouseleave', Swal.resumeTimer);
+			}
+		});
+
+		await Toast.fire({
+			icon: 'success',
+			title: 'This Order has been Deleted Successfully'
+		});
+	} catch (error) {
+		return console.log(error.message);
+	}
 }
