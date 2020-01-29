@@ -42,6 +42,6 @@ class GEOCORD {
 		//adding symv=bol
 		const price = '₦ ' + priceV;
 
-		return price;
+		return priceV;
 	}
 }
