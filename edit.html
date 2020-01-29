@@ -1,168 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"> -->
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon44.png">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <script src="./js/auth/UserAuth.js"></script>
-    <title>Sendit-Dashboard</title>
-  
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon44.png">
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="./js/auth/UserAuth.js"></script>
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+  <title>Sendit-Dashboard</title>
+
 
 </head>
+
 <body>
   <div id="userDashboardHeader"></div>
-        <div class="content">
-          <main>
-            <div class="container ">
-              <div class="dashboard-content-holder  wow fadeInUp mb-3">
-                <h3> USER DASHBOARD</h3>
-                <div class="dash-home"><a href="dashboard.html">Home </a> / Edit Profile</div>              
-              </div>
-              <div class="edit-profile-section">
-                <div class="card-1">
-                  <div class="container mt-5 ">
-                    <div class="row">
-                      <div class="col-sm-3 text-center col-12 col-xs-12"><!--left col-->                
-                        <div class="">
-                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" id="img_id" class="avatar img-thumbnail" alt="avatar">
-                            <input type="file" id="avatar" class="text-center center-block file-upload">
-                            
-                          </div></hr><br>
-
-                        </div><!--/col-3-->
-                      <div class="col-sm-9  wow fadeIn">
-                          <div class="tab-content">
-                            <div class="tab-pane active" id="home">
-                                  <form class="form" action="##" method="post" id="registrationForm">
-                                      <div class="form-group display">
-                                        <div class="INFORMATION"></div>
-                                          <div class="col-xs-6 col-md-10">
-                                              <label for="first_name"><h4>Full name</h4></label>
-                                              <input type="text" class="form-control" name="name" id="first_name" placeholder="Full Name" title="enter your Full name ">
-                                          </div>
-                                      </div>
-                          
-                                      <div class="form-group">
-                                          
-                                          <div class="col-xs-6 col-md-10 ">
-                                              <label for="phone"><h4>Phone</h4></label>
-                                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
-                                          </div>
-                                      </div>
-                          
-                                      <div class="form-group">
-                                          
-                                          <div class="col-xs-6 col-md-10">
-                                              <label for="email"><h4>Email</h4></label>
-                                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
-                                          </div>
-                                      </div>
-                                      <div class="form-group">
-                                          
-                                          <div class="col-xs-6 col-md-10">
-                                              <label for="address"><h4>Address</h4></label>
-                                              <input type="address" class="form-control" id="location" placeholder="Address" title="enter your address">
-                                          </div>
-                                      </div>
-                                      <div class="form-group">
-                                           <div class="col-xs-6 col-md-10 col-xs-12">
-                                                <br>
-                                                <button class="btn btn-lg btn-danger" id="submitForm" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                 <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                                            </div>
-                                      </div>
-                                </form>
-                              
-                              <!-- <hr> -->
-                              
-                             </div>
-                               
-                          </div><!--/tab-pane-->
-                          </div><!--/tab-content-->
-                
-                        </div><!--/col-9-->
-                    </div><!--/row-->
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-          </main>       
+  <div class="content">
+    <main>
+      <div class="container ">
+        <div class="dashboard-content-holder  wow fadeInUp mb-3">
+          <h3> USER DASHBOARD</h3>
+          <div class="dash-home"><a href="dashboard.html">Home </a> / Edit Profile</div>
         </div>
-        <div id="userDashboardfooter"></div>
+        <div class="edit-profile-section">
+          <div class="card-1">
+            <div class="container mt-5 ">
+              <div class="row">
+                <div class="col-sm-3 text-center col-12 col-xs-12">
+                  <!--left col-->
+                  <form encType="multipart/form-data">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" id="img_id" class="avatar img-thumbnail"
+                      alt="avatar">
+                    <input type="file" id="avatar" class="text-center  center-block file-upload"
+                      placeholder="Upload File">
+                  </form>
+                  </hr><br>
+
+                </div>
+                <!--/col-3-->
+                <div class="col-sm-9  wow fadeIn">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                      <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group display">
+                          <div class="INFORMATION"></div>
+                          <div class="col-xs-6 col-md-10">
+                            <label for="first_name">
+                              <h4>Full name</h4>
+                            </label>
+                            <input type="text" class="form-control" name="name" id="first_name" placeholder="Full Name"
+                              title="enter your Full name ">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+
+                          <div class="col-xs-6 col-md-10 ">
+                            <label for="phone">
+                              <h4>Phone</h4>
+                            </label>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone"
+                              title="enter your phone number if any.">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+
+                          <div class="col-xs-6 col-md-10">
+                            <label for="email">
+                              <h4>Email</h4>
+                            </label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com"
+                              title="enter your email.">
+                          </div>
+                        </div>
+                        <div class="form-group">
+
+                          <div class="col-xs-6 col-md-10">
+                            <label for="address">
+                              <h4>Address</h4>
+                            </label>
+                            <input type="address" class="form-control" id="location" placeholder="Address"
+                              title="enter your address">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-xs-6 col-md-10 col-xs-12">
+                            <br>
+                            <button class="btn btn-lg btn-danger" id="submitForm" type="submit"><i
+                                class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
+                              Reset</button>
+                          </div>
+                        </div>
+                      </form>
+
+                      <!-- <hr> -->
+
+                    </div>
+
+                  </div>
+                  <!--/tab-pane-->
+                </div>
+                <!--/tab-content-->
+
+              </div>
+              <!--/col-9-->
+            </div>
+            <!--/row-->
+          </div>
+        </div>
+      </div>
 
 
-    <script src="./js/auth/PAYAUTH.js"></script>
-    <script src="js/dashboard/dashboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="js/UI.js"></script>
-    <script src="./js/dashboard/profile.js"></script>
-    <script src="js/dashboard/userEditProfile.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-    <script type="text/javascript" src="libs/jquery.slimscroll.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <!-- <script src="js/wow.min.js"></script> -->
-    <script>
+
+  </div>
+  </main>
+  </div>
+  <div id="userDashboardfooter"></div>
+
+
+  <script src="./js/auth/PAYAUTH.js"></script>
+  <script src="js/dashboard/dashboard.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
+  <script src="js/UI.js"></script>
+  <script src="./js/dashboard/profile.js"></script>
+  <script src="js/dashboard/userEditProfile.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+  <script type="text/javascript" src="libs/jquery.slimscroll.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+  <!-- <script src="js/wow.min.js"></script> -->
+  <script>
     new WOW().init();
-    </script>
-    <script>
-        $(document).ready(function() {
+  </script>
+  <script>
+    $(document).ready(function () {
 
-          var readURL = function(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+      var readURL = function (input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
+          reader.onload = function (e) {
+            $('.avatar').attr('src', e.target.result);
           }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
 
 
-          $(".file-upload").on('change', async function(){
-              readURL(this);
-              // const avatar = document.getElementById('avatar');
-              const form_data = new FormData()
-              form_data.append('avatar', this.files[0]);
-              const image = {
-                avatar: this.files[0]
+      $(".file-upload").on('change', async function () {
+        readURL(this);
+        // const avatar = document.getElementById('avatar');
+        const form_data = new FormData()
+        form_data.append('avatar', this.files[0]);
+        const image = {
+          avatar: this.files[0]
+        }
+        // return console.log(image)
+        await fetch('https://senditappkh.herokuapp.com/api/v1/user/avatar', {
+          method: 'PATCH',
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('user_jwt')}`
+          },
+          body: form_data
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then(async (data) => {
+
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              onOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
               }
-              // return console.log(image)
-               await axios.patch('https://senditappkh.herokuapp.com/api/v1/user/avatar', form_data)
-                .then(data =>{
-                  console.log(data)
-                })
-                .catch(error =>{
-                  console.log(error.message)
-                })
-          });
-        });        
+            })
 
-       
-
-
-
-
-     
+            await Toast.fire({
+              icon: 'success',
+              title: 'Profile Picture Updated Successfully'
+            })
+            console.log(data)
+            return window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.message)
+          })
+      });
+    });
 
 
-    </script>
-  </body>
+
+
+
+
+
+
+
+  </script>
+</body>
+
 </html>
