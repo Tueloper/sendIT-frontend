@@ -50,12 +50,21 @@ async function editProfile(e) {
 				return response.json();
 			})
 			.then(async function(data) {
-				await Swal.fire({
+				const Toast = Swal.mixin({
+					toast: true,
 					position: 'top-end',
-					icon: 'success',
-					title: 'Your Profile Is Updated',
 					showConfirmButton: false,
-					timer: 1500
+					timer: 3000,
+					timerProgressBar: true,
+					onOpen: (toast) => {
+						toast.addEventListener('mouseenter', Swal.stopTimer);
+						toast.addEventListener('mouseleave', Swal.resumeTimer);
+					}
+				});
+
+				await Toast.fire({
+					icon: 'success',
+					title: 'Profile Details Updated Successfully'
 				});
 				console.log(data);
 				editProfileForm.innerHTML = `Save`;
