@@ -218,6 +218,14 @@ function payWithRave() {
 			console.log('This is the response returned after a charge', response);
 			if (response.tx.chargeResponseCode == '00' || response.tx.chargeResponseCode == '0') {
 				// redirect to a success page
+				const priceObj = {
+					id: order._id,
+					price: prices
+				};
+
+				const priceConfirmed = await pay.confirmPayemnt(priceObj);
+				console.log(priceConfirmed);
+
 				window.location.href = '/parcel-details.html';
 			} else {
 				// redirect to a failure page.
